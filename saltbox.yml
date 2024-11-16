@@ -74,6 +74,7 @@
     - { role: gluetun, tags: ['gluetun'] }
     - { role: grafana, tags: ['grafana'] }
     - { role: jackett, tags: ['jackett'] }
+    - { role: zoneminder, tags: ['zoneminder'] }
     - { role: jellyfin, tags: ['jellyfin'] }
     - { role: mainline, tags: ['mainline'] }
     - { role: mariadb, tags: ['mariadb'] }
