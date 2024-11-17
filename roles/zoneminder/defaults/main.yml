@@ -90,6 +90,9 @@ zoneminder_docker_envs_default:
   PUID: "{{ uid }}"
   PGID: "{{ gid }}"
   TZ: "{{ tz }}"
+  MYSQL_ROOT_PASSWORD: "password321"
+  MYSQL_USER: "{{ user.name }}"
+  MYSQL_PASSWORD: "password321"
 zoneminder_docker_envs_custom: {}
 zoneminder_docker_envs: "{{ zoneminder_docker_envs_default
                          | combine(zoneminder_docker_envs_custom) }}"
