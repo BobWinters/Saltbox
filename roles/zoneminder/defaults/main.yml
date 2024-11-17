@@ -102,16 +102,28 @@ zoneminder_docker_commands: "{{ zoneminder_docker_commands_default
 
 # Volumes
 zoneminder_docker_volumes_default:
-  - "{{ zoneminder_paths_location }}:/var/lib/mysql"
+  - "{{ zoneminder_paths_location }}/data:/data"
+  - "{{ zoneminder_paths_location }}/config:/config"
+  - "/dev/shm:/dev/shm"
+  - "{{ zoneminder_paths_location }}/log:/log"
 zoneminder_docker_volumes_custom: []
 zoneminder_docker_volumes: "{{ zoneminder_docker_volumes_default
                             + zoneminder_docker_volumes_custom }}"
 
+# Mounts
+zoneminder_docker_mounts_default:
+  - target: /tmp
+    type: tmpfs
+    tmpfs_size: 1000000000
+zoneminder_docker_mounts_custom: []
+zoneminder_docker_mounts: "{{ lookup('vars', zoneminder_name + '_docker_mounts_default', default=zoneminder_docker_mounts_default)
+                        + lookup('vars', zoneminder_name + '_docker_mounts_custom', default=zoneminder_docker_mounts_custom) }}"
+
 # Devices
 zoneminder_docker_devices_default: []
 zoneminder_docker_devices_custom: []
-zoneminder_docker_devices: "{{ zoneminder_docker_devices_default
-                            + zoneminder_docker_devices_custom }}"
+zoneminder_docker_devices: "{{ lookup('vars', zoneminder_name + '_docker_devices_default', default=zoneminder_docker_devices_default)
+                         + lookup('vars', zoneminder_name + '_docker_devices_custom', default=zoneminder_docker_devices_custom) }}"
 
 # Hosts
 zoneminder_docker_hosts_default: {}
